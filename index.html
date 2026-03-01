@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1D293B">
+    <link rel="manifest" href="/EZwallet/manifest.json">
+    <meta name="theme-color" content="#0F172A">
     <title>EZwallet</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/rayanfelipe9/media/main/wallet-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,11 +13,14 @@
   </head>
   <body>
     <div id="root"></div>
+    
     <script type="module" src="/src/main.tsx"></script>
+
     <script>
+      // Este código permite que o mestre instale o app no celular
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          navigator.serviceWorker.register('sw.js');
+          navigator.serviceWorker.register('/EZwallet/sw.js').catch(err => console.log('Erro SW:', err));
         });
       }
     </script>
