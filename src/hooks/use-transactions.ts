@@ -9,11 +9,13 @@ export interface Transaction {
   date: string;
 }
 
+const STORAGE_KEY = "ezwallet_data";
+
 export function useTransactions() {
   return useQuery<Transaction[]>({
     queryKey: ["/api/transactions"],
     queryFn: () => {
-      const data = localStorage.getItem("ezwallet_data");
+      const data = localStorage.getItem(STORAGE_KEY);
       return data ? JSON.parse(data) : [];
     },
   });
@@ -23,13 +25,16 @@ export function useCreateTransaction() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (newTx: Omit<Transaction, "id">) => {
-      const data = localStorage.getItem("ezwallet_data");
+      const data = localStorage.getItem(STORAGE_KEY);
       const transactions = data ? JSON.parse(data) : [];
       const txWithId = { ...newTx, id: Date.now() };
-      localStorage.setItem("ezwallet_data", JSON.stringify([...transactions, txWithId]));
+      
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...transactions, txWithId]));
       return txWithId;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/transactions"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/transactions"] });
+    },
   });
 }
 
@@ -37,12 +42,14 @@ export function useDeleteTransaction() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: number) => {
-      const data = localStorage.getItem("ezwallet_data");
+      const data = localStorage.getItem(STORAGE_KEY);
       if (data) {
         const transactions = JSON.parse(data).filter((t: Transaction) => t.id !== id);
-        localStorage.setItem("ezwallet_data", JSON.stringify(transactions));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
       }
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/transactions"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/transactions"] });
+    },
   });
 }
