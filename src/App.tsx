@@ -1,18 +1,19 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Router } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { Layout } from "./components/layout";
 import Dashboard from "./pages/dashboard";
 import Transactions from "./pages/transactions";
-import Layout from "./components/layout";
+import NotFound from "./pages/not-found";
 
-function Router() {
+function RouterComponent() {
   return (
     <Layout>
       <Switch>
-        {/* As rotas agora conversam com o link do GitHub Pages do Senhor */}
+        {/* Usamos o caminho relativo para funcionar no GitHub Pages */}
         <Route path="/" component={Dashboard} />
         <Route path="/transactions" component={Transactions} />
-        <Route>404 - Mestre, esta página não existe.</Route>
+        <Route component={NotFound} />
       </Switch>
     </Layout>
   );
@@ -21,7 +22,10 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router />
+      {/* O 'base' é o segredo para o link do GitHub funcionar */}
+      <Router base="/EZwallet">
+        <RouterComponent />
+      </Router>
     </QueryClientProvider>
   );
 }
