@@ -15,13 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   </head>
-  <body className="bg-slate-950">
+  <body class="bg-slate-950">
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="src/main.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-          // O registro do SW garante que o Nexus funcione como um app nativo
           navigator.serviceWorker.register('sw.js').catch(err => console.log('Erro SW:', err));
         });
       }
