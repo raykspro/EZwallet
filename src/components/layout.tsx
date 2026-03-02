@@ -12,13 +12,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Link href="/">
           <div className={`flex flex-col items-center gap-1 cursor-pointer ${isActive('/') ? 'text-blue-400' : 'text-slate-500'}`}>
             <LayoutDashboard className="w-6 h-6" />
-            <span className="text-[10px] font-bold">Dashboard</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">Dashboard</span>
           </div>
         </Link>
         <Link href="/transactions">
           <div className={`flex flex-col items-center gap-1 cursor-pointer ${isActive('/transactions') ? 'text-blue-400' : 'text-slate-500'}`}>
             <ReceiptText className="w-6 h-6" />
-            <span className="text-[10px] font-bold">Transações</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">Transações</span>
           </div>
         </Link>
       </nav>
