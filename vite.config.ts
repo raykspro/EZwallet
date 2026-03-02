@@ -4,7 +4,8 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/EZwallet/", // Vital para o GitHub Pages
+  // FUNDAMENTAL: Alterado para /Nexus/ para coincidir com o novo repositório
+  base: "/Nexus/", 
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
