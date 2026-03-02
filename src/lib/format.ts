@@ -1,3 +1,4 @@
+// Corrigido para minúsculo para que o compilador reconheça a exportação
 export function formatCurrency(value: number): string {
   // Garante que o valor seja tratado como número para o Real Brasileiro
   return new Intl.NumberFormat('pt-BR', {
