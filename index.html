@@ -4,19 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0F172A">
-    <title>EZwallet</title>
-    <link rel="icon" type="image/png" href="icon.png" />
+    
+    <meta name="theme-color" content="#020617">
+    
+    <title>Nexus Finanças</title>
+    
+    <link rel="icon" type="image/png" href="logo-nexus.png" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body className="bg-slate-950">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
+          // O registro do SW garante que o Nexus funcione como um app nativo
           navigator.serviceWorker.register('sw.js').catch(err => console.log('Erro SW:', err));
         });
       }
