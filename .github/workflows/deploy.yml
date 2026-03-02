@@ -1,16 +1,14 @@
-name: Deploy Nexus Finanças
+name: Deploy Nexus
 
 on:
   push:
     branches: ["main"]
 
-# Permissões necessárias para o Senhor dominar o GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Garante que apenas um deploy aconteça por vez
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -21,23 +19,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm' # Otimiza o tempo de build para o Senhor
-
-      - name: Install dependencies
+          cache: 'npm'
+      - name: Install
         run: npm install
-
       - name: Build
         run: npm run build
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
+      - name: Upload
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
@@ -45,10 +36,9 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps: deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
