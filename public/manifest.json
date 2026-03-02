@@ -1,15 +1,25 @@
 {
   "short_name": "Nexus",
   "name": "Nexus Finanças",
+  "description": "Controle financeiro de mestre",
   "start_url": "/Nexus/",
+  "scope": "/Nexus/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#020617",
+  "background_color": "#020617",
   "icons": [
     {
       "src": "logo-nexus.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo-nexus.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ],
-  "display": "standalone",
-  "theme_color": "#020617",
-  "background_color": "#020617"
+  ]
 }
