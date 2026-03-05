@@ -26,11 +26,12 @@ jobs:
           node-version: 20
           
       - name: Install Dependencies
+        # Permite a instalação sem o arquivo package-lock.json
         run: npm install --no-package-lock
         
       - name: Build
-        # Forçamos o Vite a ignorar erros de TypeScript para o site subir agora
-        run: npx vite build
+        # CI=false impede que avisos de código (warnings) sejam tratados como erros fatais
+        run: CI=false npm run build
         
       - name: Upload
         uses: actions/upload-pages-artifact@v3
