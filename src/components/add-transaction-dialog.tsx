@@ -42,8 +42,8 @@ export function AddTransactionDialog() {
     <div className="fixed inset-0 bg-slate-950/90 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
       <div className="bg-slate-900 w-full max-w-md rounded-[32px] border border-slate-800 p-6 space-y-6 shadow-2xl">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-black text-white italic">NOVO <span className="text-blue-500">LANÇAMENTO</span></h2>
-          <button onClick={() => setOpen(false)} className="p-2 text-slate-500"><X /></button>
+          <h2 className="text-xl font-black text-white italic tracking-tighter">NOVO <span className="text-blue-500">LANÇAMENTO</span></h2>
+          <button onClick={() => setOpen(false)} className="p-2 text-slate-500 hover:text-white transition-colors"><X /></button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -82,10 +82,10 @@ export function AddTransactionDialog() {
               <select 
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full h-12 bg-slate-950 border border-slate-800 rounded-2xl px-4 text-xs font-bold text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 appearance-none"
+                className="w-full h-12 bg-slate-950 border border-slate-800 rounded-2xl px-4 text-xs font-bold text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 appearance-none cursor-pointer"
               >
                 {["Alimentação", "Lazer", "Transporte", "Saúde", "Salário", "Investimento", "Extra"].map(cat => (
-                  <option key={cat} value={cat}>{cat}</option>
+                  <option key={cat} value={cat} className="bg-slate-900">{cat}</option>
                 ))}
               </select>
             </div>
@@ -95,10 +95,10 @@ export function AddTransactionDialog() {
               <select 
                 value={formData.paymentMethod}
                 onChange={(e) => setFormData({ ...formData, paymentMethod: e.target.value })}
-                className="w-full h-12 bg-slate-950 border border-slate-800 rounded-2xl px-4 text-xs font-bold text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 appearance-none"
+                className="w-full h-12 bg-slate-950 border border-slate-800 rounded-2xl px-4 text-xs font-bold text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-600 appearance-none cursor-pointer"
               >
                 {["Pix", "Cartão de Crédito", "Dinheiro", "Cartão de Débito"].map(method => (
-                  <option key={method} value={method}>{method}</option>
+                  <option key={method} value={method} className="bg-slate-900">{method}</option>
                 ))}
               </select>
             </div>
@@ -106,9 +106,10 @@ export function AddTransactionDialog() {
 
           <button 
             type="submit" 
-            className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase tracking-widest text-sm transition-all"
+            disabled={createTransaction.isPending}
+            className="w-full py-4 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 text-white rounded-2xl font-black uppercase tracking-[0.2em] text-sm transition-all shadow-lg shadow-blue-900/20"
           >
-            Confirmar Lançamento
+            {createTransaction.isPending ? "Processando..." : "Confirmar Lançamento"}
           </button>
         </form>
       </div>
