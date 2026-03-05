@@ -56,12 +56,12 @@ export default function Transactions() {
     <div className="space-y-6 animate-in fade-in duration-500 pb-32">
       <header className="flex justify-between items-end pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
-          {/* IDENTIDADE NEXUS: Nome em Azul, Extrato em cor base */}
-          <h1 className="text-3xl font-black italic tracking-tighter uppercase">
-            <span className="text-blue-600">NEXUS</span>{" "}
-            <span className="text-slate-900 dark:text-white">EXTRATO</span>
+          {/* IDENTIDADE REATIVA: NEXUS reage ao tema, EXTRATO permanece sóbrio */}
+          <h1 className="text-3xl font-black italic tracking-tighter uppercase leading-none">
+            <span className="text-blue-600 dark:text-white transition-colors duration-500">NEXUS</span>{" "}
+            <span className="text-slate-900 dark:text-slate-500">EXTRATO</span>
           </h1>
-          <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">Registros de Operações</p>
+          <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mt-1">Registros de Operações</p>
         </div>
         <span className="text-[10px] font-black text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg uppercase tracking-widest border border-slate-200 dark:border-slate-700">
           {transactions.length} Itens
@@ -81,7 +81,7 @@ export default function Transactions() {
             return (
               <div key={t.id} className="bg-white dark:bg-slate-900 p-4 rounded-[24px] border border-slate-200 dark:border-slate-800 flex justify-between items-center shadow-sm group hover:border-blue-500/30 transition-all">
                 <div className="flex items-center gap-4">
-                  <div className="p-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900">
+                  <div className="p-3.5 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 transition-colors">
                     <Icon className="w-5 h-5 stroke-[2.5px]" />
                   </div>
                   <div>
