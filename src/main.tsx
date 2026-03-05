@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// IMPORTANTE: Se o seu arquivo for app.tsx, mude para './app'
+// Padronizado para buscar o arquivo App.tsx (Maiúsculo)
 import App from './App'; 
 import './index.css'; 
 
@@ -13,6 +13,6 @@ if (rootElement) {
     </React.StrictMode>
   );
 } else {
-  // Isso evita que o app trave se o HTML demorar a carregar
-  console.error('Elemento root não encontrado no HTML.');
+  // Diagnóstico preciso para o Senhor caso o HTML falhe
+  console.error('Falha Crítica: Elemento "root" não encontrado no index.html.');
 }
