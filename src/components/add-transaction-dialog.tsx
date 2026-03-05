@@ -17,7 +17,9 @@ export function AddTransactionDialog() {
 
   const handleOpen = (type: "income" | "expense") => {
     setInitialType(type);
-    setFormData(prev => ({ ...prev, description: "", amount: "" }));
+    // Define categoria padrão inteligente ao abrir
+    const defaultCat = type === "expense" ? "Alimentação" : "Salário";
+    setFormData(prev => ({ ...prev, description: "", amount: "", category: defaultCat }));
     setOpen(true);
   };
 
@@ -91,10 +93,10 @@ export function AddTransactionDialog() {
               className="w-full h-12 bg-slate-950 text-white border border-slate-800 rounded-xl px-2 text-[10px] font-black uppercase outline-none cursor-pointer"
             >
               {initialType === "expense" ? 
-                ["Alimentação", "Lazer", "Transporte", "Saúde", "Extra"].map(cat => (
+                ["Alimentação", "Lazer", "Transporte", "Saúde", "Fatura", "Estudos", "Outros"].map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
                 )) :
-                ["Salário", "Investimento", "Extra"].map(cat => (
+                ["Salário", "Investimento", "Outros"].map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
                 ))
               }
