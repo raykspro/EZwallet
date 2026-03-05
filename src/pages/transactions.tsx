@@ -63,7 +63,7 @@ export default function Transactions() {
         </span>
       </header>
 
-      <div className="space-y-3">
+      <div className="space-y-3 pb-20">
         {sortedTransactions.length === 0 ? (
           <div className="text-center py-20 bg-slate-900/30 rounded-[32px] border border-dashed border-slate-800">
             <p className="text-slate-600 font-bold text-xs uppercase italic">Nenhum rastro financeiro encontrado, mestre.</p>
@@ -75,10 +75,10 @@ export default function Transactions() {
             const MethodIcon = methodIcons[t.paymentMethod] || CreditCard;
 
             return (
-              <div key={t.id} className="group bg-slate-900/40 hover:bg-slate-900/80 p-4 rounded-[24px] border border-slate-800/50 hover:border-rose-900/30 transition-all active:scale-[0.98]">
+              <div key={t.id} className="group bg-slate-900/40 hover:bg-slate-900/80 p-4 rounded-[24px] border border-slate-800/50 hover:border-blue-900/30 transition-all active:scale-[0.98]">
                 <div className="flex justify-between items-center">
                   <div className="flex gap-4 items-center">
-                    <div className={`p-3 rounded-2xl ${config.color} transition-all duration-500 group-hover:shadow-[0_0_15px_rgba(0,0,0,0.3)]`}>
+                    <div className={`p-3 rounded-2xl ${config.color} transition-all duration-500`}>
                       <Icon className="w-5 h-5" />
                     </div>
                     
@@ -106,12 +106,11 @@ export default function Transactions() {
                       </p>
                     </div>
                     
-                    {/* Botão de Exclusão */}
                     <button 
                       onClick={() => handleDelete(t.id)}
-                      className="opacity-0 group-hover:opacity-100 p-2 text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all"
+                      className="p-2 text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all"
                     >
-                      <Trash2 className="w-5 h-5" />
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
