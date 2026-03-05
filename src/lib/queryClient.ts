@@ -1,11 +1,16 @@
 import { QueryClient } from "@tanstack/react-query";
 
-// Este é o cérebro que coordena as informações da Nexus
+/**
+ * Este é o cérebro que coordena as informações da Nexus.
+ * Configurado para máxima performance no ambiente do Senhor.
+ */
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false, // Evita recargas desnecessárias quando o Senhor volta para a aba
-      retry: false, // Se houver erro de leitura, o sistema reporta ao Senhor imediatamente
+      // Evita recargas desnecessárias quando o Senhor volta para a aba do navegador
+      refetchOnWindowFocus: false, 
+      // Em caso de falha, o sistema reporta ao Senhor imediatamente em vez de tentar infinitamente
+      retry: false, 
     },
   },
 });
