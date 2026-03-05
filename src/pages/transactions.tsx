@@ -1,41 +1,6 @@
 import { useTransactions, useDeleteTransaction } from "@/hooks/use-transactions";
 import { formatCurrency, formatDate } from "@/lib/format";
-import { 
-  Utensils, 
-  PartyPopper, 
-  PiggyBank, 
-  Repeat, 
-  Car, 
-  Layers, 
-  HeartPulse, 
-  Wallet,
-  CreditCard,
-  Banknote,
-  Coins,
-  ArrowDownLeft,
-  Trash2,
-  LucideIcon
-} from "lucide-react";
-
-const categoryConfig: Record<string, { icon: LucideIcon, color: string }> = {
-  "Alimentação": { icon: Utensils, color: "text-orange-400 bg-orange-400/10" },
-  "Lazer": { icon: PartyPopper, color: "text-purple-400 bg-purple-400/10" },
-  "Reservado": { icon: PiggyBank, color: "text-sky-400 bg-sky-400/10" },
-  "Assinatura": { icon: Repeat, color: "text-indigo-400 bg-indigo-400/10" },
-  "Transporte": { icon: Car, color: "text-cyan-400 bg-cyan-400/10" },
-  "Parcelamento": { icon: Layers, color: "text-yellow-400 bg-yellow-400/10" },
-  "Cuidados Pessoais": { icon: HeartPulse, color: "text-pink-400 bg-pink-400/10" },
-  "Salário": { icon: Wallet, color: "text-emerald-400 bg-emerald-400/10" },
-  "Investimento": { icon: Banknote, color: "text-blue-500 bg-blue-500/10" },
-  "Extra": { icon: Coins, color: "text-amber-400 bg-amber-400/10" },
-};
-
-const methodIcons: Record<string, LucideIcon> = {
-  "Pix": Coins,
-  "Cartão de Crédito": CreditCard,
-  "Cartão de Débito": CreditCard,
-  "Dinheiro": Banknote,
-};
+import { Trash2, ReceiptText, ArrowDownLeft } from "lucide-react";
 
 export default function Transactions() {
   const { data: transactions = [] } = useTransactions();
@@ -63,60 +28,46 @@ export default function Transactions() {
         </span>
       </header>
 
-      <div className="space-y-3 pb-20">
+      <div className="space-y-3 pb-24">
         {sortedTransactions.length === 0 ? (
           <div className="text-center py-20 bg-slate-900/30 rounded-[32px] border border-dashed border-slate-800">
             <p className="text-slate-600 font-bold text-xs uppercase italic">Nenhum rastro financeiro encontrado, mestre.</p>
           </div>
         ) : (
-          sortedTransactions.map((t) => {
-            const config = categoryConfig[t.category] || { icon: ArrowDownLeft, color: "text-slate-400 bg-slate-400/10" };
-            const Icon = config.icon;
-            const MethodIcon = methodIcons[t.paymentMethod] || CreditCard;
-
-            return (
-              <div key={t.id} className="group bg-slate-900/40 hover:bg-slate-900/80 p-4 rounded-[24px] border border-slate-800/50 hover:border-blue-900/30 transition-all active:scale-[0.98]">
-                <div className="flex justify-between items-center">
-                  <div className="flex gap-4 items-center">
-                    <div className={`p-3 rounded-2xl ${config.color} transition-all duration-500`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    
-                    <div>
-                      <p className="font-bold text-slate-100 text-sm leading-tight group-hover:text-white transition-colors">{t.description}</p>
-                      <div className="flex items-center gap-2 mt-1.5">
-                        <span className="text-[9px] text-slate-500 font-black uppercase tracking-wider flex items-center gap-1 bg-slate-800/50 px-2 py-0.5 rounded-md">
-                          <MethodIcon className="w-2.5 h-2.5" />
-                          {t.paymentMethod}
-                        </span>
-                        <span className="text-[9px] text-slate-600 font-black uppercase tracking-wider">
-                          {t.category}
-                        </span>
-                      </div>
-                    </div>
+          sortedTransactions.map((t) => (
+            <div key={t.id} className="group bg-slate-900/40 p-4 rounded-[24px] border border-slate-800/50 hover:border-blue-900/30 transition-all">
+              <div className="flex justify-between items-center">
+                <div className="flex gap-4 items-center">
+                  <div className={`p-3 rounded-2xl bg-slate-800/50 text-slate-400`}>
+                    <ArrowDownLeft className="w-5 h-5" />
                   </div>
-
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <p className={`font-black text-base tracking-tight ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-500'}`}>
-                        {t.type === 'income' ? '+' : '-'} {formatCurrency(t.amount)}
-                      </p>
-                      <p className="text-[9px] font-bold text-slate-600 mt-0.5 uppercase">
-                        {formatDate(t.date)}
-                      </p>
-                    </div>
-                    
-                    <button 
-                      onClick={() => handleDelete(t.id)}
-                      className="p-2 text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                  <div>
+                    <p className="font-bold text-slate-100 text-sm leading-tight">{t.description}</p>
+                    <p className="text-[9px] text-slate-500 font-black uppercase tracking-wider mt-1">
+                      {t.category} • {t.paymentMethod}
+                    </p>
                   </div>
                 </div>
+
+                <div className="flex items-center gap-4">
+                  <div className="text-right">
+                    <p className={`font-black text-base tracking-tight ${t.type === 'income' ? 'text-emerald-400' : 'text-rose-500'}`}>
+                      {t.type === 'income' ? '+' : '-'} {formatCurrency(t.amount)}
+                    </p>
+                    <p className="text-[9px] font-bold text-slate-600 mt-0.5 uppercase">
+                      {formatDate(t.date)}
+                    </p>
+                  </div>
+                  <button 
+                    onClick={() => handleDelete(t.id)}
+                    className="p-2 text-slate-600 hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-all"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
-            );
-          })
+            </div>
+          ))
         )}
       </div>
     </div>
